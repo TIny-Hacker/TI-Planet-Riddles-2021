@@ -157,5 +157,6 @@ images = (      #Piece of the red banner with stars on it. The characters of the
   ),
 )
 draw_image(images[0], 0, 0, 32, palettes[0], 1, 1, 5)       #Draws a small piece of the banner
+draw_image(images[0], 64, 0, 32, palettes[0], -1, 1, 5)     #Draws a reversed piece of the banner next to the old one. the 3rd to last argument is "-1", meaning that the tile is flipped.
 show()
 wait()

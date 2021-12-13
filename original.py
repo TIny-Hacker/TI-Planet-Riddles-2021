@@ -122,4 +122,17 @@ for y in range(ceil(screen_h / 32)):
   for x in range(ceil(screen_w / 32)):
     draw_image(images[0], x*32, y*32, 32, palettes[0])
 show()
+
+palettes = (
+  (
+    (7,97,182),(55,139,223),(99,176,247),(141,216,247),
+  ),
+)
+images = (
+  (
+    b"\x80\x01!\x14!\x18\x1e\x19\x1e\x19\x06\x17\x1a\x1f\x1a\x1f\x1a\x1f\x1a\x17\x06\x19\x1e\x19\x1e\x18!\x14!\x80\x01"
+  ),
+)
+draw_image(images[0], 0, screen_h-16, 16, palettes[0])
+show()
 wait()

@@ -1,5 +1,9 @@
 from math import ceil
 
+platform = ''
+try: from sys import platform
+except: pass
+
 def nop(*argv): pass
 show, wait = nop, nop
 neg_fill_rect = False
@@ -9,7 +13,7 @@ try: # NumWorks, NumWorks + KhiCAS, TI-Nspire CX + KhiCAS
   import kandinsky
   fill_rect = kandinsky.fill_rect
   screen_w, screen_h = 320, 222
-  neg_fill_rect = True
+  neg_fill_rect = platform!='nspire' and platform!='numworks'
 except:
   try: # TI
     import ti_draw
@@ -172,6 +176,9 @@ palettes = (
   (
     (0,0,0),(36,35,36),(198,0,18),(247,26,55),(157,0,0),(231,97,81),(239,147,90),(247,183,133),(55,114,167),(247,247,247),(72,155,207),(36,71,133),(166,80,0),(239,199,45),(223,131,45),
   ),
+  (
+    (0,0,0),(0,0,0),(255,183,45),(255,255,247),(255,216,141),
+  ),
 )
 images = (
   (
@@ -186,10 +193,16 @@ images = (
     b"\x01\x20!\x0b!\x19\x1a\t\x01\x20\x01+\x18\n\b*\b\x010\x01\x0b\x18\n\b\x0b8\x11\x10\x01\x0c\x01\x0b\x18\x0b\x01\x1b\b\x01\r\x0e\x01\x00\x01\x0c\x01+\x01\x00\x01\x0b\x01\r\x0e\x0c\x01\x00\x01\x0c\x0e!\x20\x01\x1e\x0c\x01\x20\x01\x0c\x1e\x0c\x01\x10"
     b"\x01\x1c\x01@A\x20\x11\x20"
   ),
+  (
+    b"\x80\x01i\x00\x01j\tj\t\x12\x03\x04\x1a\x04\x03\x12\t\x12\x0b\x04\x12\x04\x03\x12\t\x12\x13\x12\x04\x03\x12\t\x12\x03\x04\x0b\n\x04\x03\x12\t\x12\x03\x0c\x03\x04\x02\x04\x03\x12\t\x12\x03\x04\x02\x04\x03\x0c\x03\x12\t\x12\x03\x04\n\x0b\x04\x03\x12"
+    b"\t\x12\x03\x04\x12\x13\x12\t\x12\x03\x04\x12\x04\x0b\x12\t\x12\x03\x04\x1a\x04\x03\x12\tj\tj\x01"
+  ),
 )
 for j in range(-1, 2, 2):
   for i in range(1, 3):
     x = screen_w//2 - j*(screen_w * i // 6)
-    draw_image(images[i+j == 3], x - 8, screen_h - 48, 16, palettes[i+j == 3], itransp= i+j!=3 and -1)
+    draw_image(images[2], screen_w//2 + (screen_w * 1 // 6) - 8, screen_h - 64, 16, palettes[2], itransp=0)
     show()
+draw_image(images[2], 205, screen_h - 64, 16, palettes[2], itransp=0)
+show()
 wait()

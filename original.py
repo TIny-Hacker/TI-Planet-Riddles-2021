@@ -118,7 +118,8 @@ images = (
     b"\x02\x03\x02\x04g\x04\x0eg\n\x01\n_\n\t\nW\n\x05\x00\x05\nO\n\x05\b\x05\nG\n\x05\x04"
   ),
 )
-for x in range(ceil(screen_w / 32)):
-  draw_image(images[0], x*32, 0, 32, palettes[0])
+for y in range(ceil(screen_h / 32)):
+  for x in range(ceil(screen_w / 32)):
+    draw_image(images[0], x*32, y*32, 32, palettes[0])
 show()
 wait()

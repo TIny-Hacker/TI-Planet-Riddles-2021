@@ -151,5 +151,6 @@ images = (
   ),
 )
 draw_image(images[0], 0, 0, 32, palettes[0], 1, 1, 5)
+draw_image(images[0], 64, 0, 32, palettes[0], -1, 1, 5)
 show()
 wait()

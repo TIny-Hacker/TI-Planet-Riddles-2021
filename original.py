@@ -187,8 +187,9 @@ images = (
     b"\x01\x1c\x01@A\x20\x11\x20"
   ),
 )
-for i in range(1, 3):
-  x = screen_w//2 - screen_w * i // 6
-  draw_image(images[i == 2], x - 8, screen_h - 48, 16, palettes[i == 2], itransp= i!=2 and -1)
-  show()
+for j in range(-1, 2, 2):
+  for i in range(1, 3):
+    x = screen_w//2 - j*(screen_w * i // 6)
+    draw_image(images[i+j == 3], x - 8, screen_h - 48, 16, palettes[i+j == 3], itransp= i+j!=3 and -1)
+    show()
 wait()

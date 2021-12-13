@@ -156,7 +156,8 @@ images = (      #Piece of the red banner with stars on it. The characters of the
     b"\x1d#\n(;,%\x00+\x10K,-\x10\xfb\x00,5\x8b\x01,=\xfb\x004Ek<M[DUCT]#dm\xfc\x00\xfd\x00\x01d\x8d\x01\tL\x9d\x01\x04\t,\xb5\x01\x0c\t\x14\xc5\x01"
   ),
 )
-draw_image(images[0], 0, 0, 32, palettes[0], 1, 1, 5)       #Draws a small piece of the banner
-draw_image(images[0], 64, 0, 32, palettes[0], -1, 1, 5)     #Draws a reversed piece of the banner next to the old one. the 3rd to last argument is "-1", meaning that the tile is flipped.
+for x in range(ceil(screen_w / 64)):      #Draw the banner across the stage
+  draw_image(images[0], x*64, 0, 32, palettes[0], 1, 1, 5)          #First the non-reversed tile
+  draw_image(images[0], (x+1)*64, 0, 32, palettes[0], -1, 1, 5)     #Afterwards the reversed tile, at an offset from the original.
 show()
 wait()

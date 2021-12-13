@@ -203,6 +203,7 @@ for j in range(-1, 2, 2):
     x = screen_w//2 - j*(screen_w * i // 6)
     draw_image(images[2], screen_w//2 + (screen_w * 1 // 6) - 8, screen_h - 64, 16, palettes[2], itransp=0)
     show()
-draw_image(images[2], 205, screen_h - 64, 16, palettes[2], itransp=0)
+draw_image(images[2], screen_w//2 + (screen_w // 6) - 8, screen_h - 64, 16, palettes[2], itransp=0)
+draw_image(images[3], screen_w//2 + (screen_w // 3) - 8, screen_h - 64, 16, palettes[3], itransp=0)
 show()
 wait()

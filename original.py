@@ -150,7 +150,8 @@ images = (
     b"\x1d#\n(;,%\x00+\x10K,-\x10\xfb\x00,5\x8b\x01,=\xfb\x004Ek<M[DUCT]#dm\xfc\x00\xfd\x00\x01d\x8d\x01\tL\x9d\x01\x04\t,\xb5\x01\x0c\t\x14\xc5\x01"
   ),
 )
-draw_image(images[0], 0, 0, 32, palettes[0], 1, 1, 5)
-draw_image(images[0], 64, 0, 32, palettes[0], -1, 1, 5)
+for x in range(ceil(screen_w / 64)):
+  draw_image(images[0], x*64, 0, 32, palettes[0], 1, 1, 5)
+  draw_image(images[0], (x+1)*64, 0, 32, palettes[0], -1, 1, 5)
 show()
 wait()

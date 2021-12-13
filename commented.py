@@ -197,8 +197,9 @@ images = (      #The door. As before, images are split into lines =< 256 charact
     b"\x01\x1c\x01@A\x20\x11\x20"
   ),
 )
-for i in range(1, 3):       #This loop draws either a door or Mario.
-  x = screen_w//2 - screen_w * i // 6
-  draw_image(images[i == 2], x - 8, screen_h - 48, 16, palettes[i == 2], itransp= i!=2 and -1)    #If `i` is equal to 2, then the statement is true and the function draws Mario. Otherwise, it will draw a door. This applies to the palette, the image, and 'itransp' which I assume refers to transparency.
-  show()
+for j in range(-1, 2, 2):     #A similar method as before is used to draw Mario and the door. However, this time it is done differently to allow for the other two doors.
+  for i in range(1, 3):
+    x = screen_w//2 - j*(screen_w * i // 6)
+    draw_image(images[i+j == 3], x - 8, screen_h - 48, 16, palettes[i+j == 3], itransp= i+j!=3 and -1)    #Mario is only drawn once, but the door is drawn three times in different locations.
+    show()
 wait()

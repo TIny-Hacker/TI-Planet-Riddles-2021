@@ -160,4 +160,35 @@ for x in range(ceil(screen_w / 64)):      #Draw the banner across the stage
   draw_image(images[0], x*64, 0, 32, palettes[0], 1, 1, 5)          #First the non-reversed tile
   draw_image(images[0], (x+1)*64, 0, 32, palettes[0], -1, 1, 5)     #Afterwards the reversed tile, at an offset from the original.
 show()
+
+#Mysterious functions of mystery
+
+def draw_rect_z(x, y, w, h, c, z=1):     #The only time this mysterious function is used is in the equally mysterious `qr_mark()` function.  
+  for dy in (0, h - 1):                  #I'm not 100% sure exactly what this function does, but judging by the name it might draw a rectangle.
+    fill_rect(x, y + dy*z, w*z, z, c)    #I still don't know what the 'z' argument does.
+  for dx in (0, w - 1):
+    fill_rect(x + dx*z, y, z, h*z, c)
+
+def qr_mark(x, y, s, c, z=1):                             #This function doesn't seem to do anything, yet. 
+  draw_rect_z(x, y, s, s, c, z)                           #When first appearing on Day 9, it is the only reference to `draw_rect_z()`
+  fill_rect(x + 2*z, y + 2*z, (s - 4)*z, (s - 4)*z, c)    #Judging by the name, I assume that it probably displays a QR Code to the link necessary to solve the puzzles.
+
+#The first door
+
+palettes = (
+  (
+    (0,0,0),(247,172,107),(133,71,73),(157,114,18),(207,147,55),(247,247,247),
+  ),
+)
+images = (      #The door. As before, images are split into lines =< 256 characters.
+  (
+    b"\x80\x01a\x02\b\x01[\x02\b\x01\x03\x19\x0b\x19\x03\x02\b\x01\x03\x01\x0b\x01\x0b\x01\x0b\x01\x03\x02\b\x01\x03\x01\x0c\x01\x0b\x01\x0c\x01\x03\x02\b\x01\x03\x01\x0c\x01\x0b\x01\x0c\x01\x03\x02\b\x01\x03\x01\x0c\x01\x0b\x01\x0c\x01\x03\x02\b\x01\x03"
+    b"\x01\x0c\x01\x0b\x01\x0c\x01\x03\x02\b\x01\x03\x01\x0c\x01\x0b\x01\x0c\x01\x03\x02\b\x01\x03\x19\x0b\x19\x03\x02\b\x01[\x02\b\x05Y\x02\b\x01\\\x02\b\x01\r\x03\x14\x01$\x02\b\x01\r\x02\x0c\x01\x0c\x01\x14\x02\b\x01\x03\n\x04\x01\x0c\x01\x1c\x02\b"
+    b"\x01\x13\x04\x0b\x04#\x02\bj\b\x01[\x02\b\x01\x03\x19\x0b\x19\x03\x02\b\x01\x03\x01\x0b\x01\x0b\x01\x0b\x01\x03\x02\b\x01\x03\x01\x0c\x01\x0b\x01\x0c\x01\x03\x02\b\x01\x03\x01\x0c\x01\x0b\x01\x0c\x01\x03\x02\b\x01\x03\x01\x0c\x01\x0b\x01\x0c\x01"
+    b"\x03\x02\b\x01\x03\x01\x0c\x01\x0b\x01\x0c\x01\x03\x02\b\x01\x03\x01\x0c\x01\x0b\x01\x0c\x01\x03\x02\b\x01\x03\x01\x0c\x01\x0b\x01\x0c\x01\x03\x02\b\x01\x03\x19\x0b\x19\x03\x02\b\x01[\x02\bj\x80\x01"
+  ),
+)
+x = screen_w//2 - screen_w // 6
+draw_image(images[0], x - 8, screen_h - 48, 16, palettes[0], itransp=-1)      #This draws the door. I'm not sure what the 'itransp' argument does.
+show()
 wait()

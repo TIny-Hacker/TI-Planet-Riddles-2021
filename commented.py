@@ -113,14 +113,15 @@ palettes = (
     (247,176,36),(247,207,73),(231,89,0),(247,131,8),
   ),
 )
-images = (
+images = (      #Background tile images, split because lines on the casio models may only have 256 characters
   (
     b"\b\x05\n?\n\x05\x18\x05\n7\n\x05\x20\x05\n/\n\x05(\x05\n'\n\x050\x05\n\x1f\n\x058\x05\n\x17\n\x05@\x05\n\x0f\n\x05H\x05\n\a\n\x05P\x05\x16\x05X\x05\x0e\x05`\x05\x06\x05d\a\x06\a`\a\x02\x04\x02\aX\a\x02\x0c\x02\aP\a\x02\x04\a\x04\x02\aH\a\x02\x04"
     b"\x0f\x04\x02\a@\a\x02\x04\x17\x04\x02\a8\a\x02\x04\x1f\x04\x02\a0\a\x02\x04'\x04\x02\a(\a\x02\x04/\x04\x02\a\x20\a\x02\x047\x04\x02\a\x18\a\x02\x04?\x04\x02\a\x10\a\x02\x04G\x04\x02\a\b\a\x02\x04O\x04\x02\a\x00\a\x02\x04W\x04\x02\x0b\x02\x04_\x04"
     b"\x02\x03\x02\x04g\x04\x0eg\n\x01\n_\n\t\nW\n\x05\x00\x05\nO\n\x05\b\x05\nG\n\x05\x04"
   ),
 )
-for x in range(ceil(screen_w / 32)):      #Draw row of tiles
-  draw_image(images[0], x*32, 0, 32, palettes[0])
+for y in range(ceil(screen_h / 32)):      #Fill background with tiles (Tiles are 32x32)
+  for x in range(ceil(screen_w / 32)):
+    draw_image(images[0], x*32, y*32, 32, palettes[0])
 show()
 wait()

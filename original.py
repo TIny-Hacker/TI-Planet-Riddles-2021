@@ -1,8 +1,8 @@
 from math import ceil
 
 platform = ''
-try: from sys import platform
-except: pass
+#try: from sys import platform
+#except: pass
 
 def nop(*argv): pass
 show, wait = nop, nop
@@ -179,6 +179,12 @@ palettes = (
   (
     (0,0,0),(0,0,0),(255,183,45),(255,255,247),(255,216,141),
   ),
+  (
+    (0,0,0),(0,0,0),(27,58,157),(157,172,215),(247,251,247),
+  ),
+  (
+    (0,0,0),(223,41,45),
+  ),
 )
 images = (
   (
@@ -197,13 +203,19 @@ images = (
     b"\x80\x01i\x00\x01j\tj\t\x12\x03\x04\x1a\x04\x03\x12\t\x12\x0b\x04\x12\x04\x03\x12\t\x12\x13\x12\x04\x03\x12\t\x12\x03\x04\x0b\n\x04\x03\x12\t\x12\x03\x0c\x03\x04\x02\x04\x03\x12\t\x12\x03\x04\x02\x04\x03\x0c\x03\x12\t\x12\x03\x04\n\x0b\x04\x03\x12"
     b"\t\x12\x03\x04\x12\x13\x12\t\x12\x03\x04\x12\x04\x0b\x12\t\x12\x03\x04\x1a\x04\x03\x12\tj\tj\x01"
   ),
+  (
+    b"\x80\x01i\x00\x01j\t\n\x0b,\x0b\n\t\x02\x03T\x02\t\x02\\\x03\t\x03\x14\x03\"\x14\x03\t\x03\x14J\t\x03\x14J\t\x03\x14J\t\x03\x14*\x14\x03\t\x02\x14+\x14\x03\t\x02\x03T\x03\t\n\x03D\x03\x02\t\x1a3\x12\tj\x01"
+  ),
+  (
+    b"\x06\a\x16\a\x02\x03\x0e\a\x16\t\x00\x01\x00\x05\b\t\x00\x01\x00\x05\b\a\x00\x03\x02\x03\x00\r\x02\x03\x00\a\x00\r\x00\x01\x00\t\x02\x0b\x00\x01\x00\t\x02\x0b\x00\x01\x00\t\x04\x03\x00\x03\x06\x05\x0e\x01\x04\x03\x12\t\x16\a\x16\x05\x1a\x05\x06"
+  ),
 )
 for j in range(-1, 2, 2):
   for i in range(1, 3):
     x = screen_w//2 - j*(screen_w * i // 6)
-    draw_image(images[2], screen_w//2 + (screen_w * 1 // 6) - 8, screen_h - 64, 16, palettes[2], itransp=0)
+    if i+j != 3:
+      draw_image(images[2 + i + j], x - 8, screen_h - 64, 16, palettes[2 + i + j], itransp=0)
+      show()
+    draw_image(images[i+j == 3], x - 8, screen_h - 48, 16, palettes[i+j == 3], itransp= i+j!=3 and -1)
     show()
-draw_image(images[2], screen_w//2 + (screen_w // 6) - 8, screen_h - 64, 16, palettes[2], itransp=0)
-draw_image(images[3], screen_w//2 + (screen_w // 3) - 8, screen_h - 64, 16, palettes[3], itransp=0)
-show()
 wait()

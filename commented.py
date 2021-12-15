@@ -173,9 +173,9 @@ def draw_rect_z(x, y, w, h, c, z=1):     #The only time this mysterious function
   for dx in (0, w - 1):
     fill_rect(x + dx*z, y, z, h*z, c)
 
-def qr_mark(x, y, s, c, z=1):                             #This function doesn't seem to do anything, yet. 
-  draw_rect_z(x, y, s, s, c, z)                           #When first appearing on Day 9, it is the only reference to `draw_rect_z()`
-  fill_rect(x + 2*z, y + 2*z, (s - 4)*z, (s - 4)*z, c)    #Judging by the name, I assume that it probably displays a QR Code to the link necessary to solve the puzzles.
+def qr_mark(x, y, s, c, z=1):                            #The comments above are old! Now we know what this function does.
+  draw_rect_z(x, y, s, s, c, z)                          #It was first used day 15
+  fill_rect(x + 2*z, y + 2*z, (s - 4)*z, (s - 4)*z, c)    
 
 #The first door
 
@@ -228,7 +228,6 @@ for j in range(-1, 2, 2):     #A similar method as before is used to draw Mario 
       show()
     draw_image(images[i+j == 3], x - 8, screen_h - 48, 16, palettes[i+j == 3], itransp= i+j!=3 and -1)    #Icons?
     show()
-#draw_image(images[2], screen_w//2 + (screen_w // 6) - 8, screen_h - 64, 16, palettes[2], itransp=0)     #Draws the NumWorks icon on the center door.
-#draw_image(images[3], screen_w//2 + (screen_w // 3) - 8, screen_h - 64, 16, palettes[3], itransp=0)     #Draws the Casio icon on the door at the far right.
-#show()                         #And now this was removed day 14. I kept it commented in but might remove later.
+qr_mark(259, screen_h - 15, 7, [0, 0, 255], 2)        #Draws the little blue "key" below the casio door. The palette specifies the color.
+show()
 wait()

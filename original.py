@@ -218,4 +218,6 @@ for j in range(-1, 2, 2):
       show()
     draw_image(images[i+j == 3], x - 8, screen_h - 48, 16, palettes[i+j == 3], itransp= i+j!=3 and -1)
     show()
+qr_mark(259, screen_h - 15, 7, [0, 0, 255], 2)
+show()
 wait()

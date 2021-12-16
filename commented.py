@@ -169,7 +169,7 @@ show()
 
 def draw_rect_z(x, y, w, h, c, z=1):     #The only time this mysterious function is used is in the equally mysterious `qr_mark()` function.  
   for dy in (0, h - 1):                  #I'm not 100% sure exactly what this function does, but judging by the name it might draw a rectangle.
-    fill_rect(x, y + dy*z, w*z, z, c)    #I'm pretty sure that the "Z" argument is for color?
+    fill_rect(x, y + dy*z, w*z, z, c)    #I was an idiot. `z` is not for color like I thought, `c` is for color. 
   for dx in (0, w - 1):
     fill_rect(x + dx*z, y, z, h*z, c)
 

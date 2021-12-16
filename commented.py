@@ -169,7 +169,7 @@ show()
 
 def draw_rect_z(x, y, w, h, c, z=1):     #The only time this mysterious function is used is in the equally mysterious `qr_mark()` function.  
   for dy in (0, h - 1):                  #I'm not 100% sure exactly what this function does, but judging by the name it might draw a rectangle.
-    fill_rect(x, y + dy*z, w*z, z, c)    #I still don't know what the 'z' argument does.
+    fill_rect(x, y + dy*z, w*z, z, c)    #I'm pretty sure that the "Z" argument is for color?
   for dx in (0, w - 1):
     fill_rect(x + dx*z, y, z, h*z, c)
 
@@ -228,6 +228,7 @@ for j in range(-1, 2, 2):     #A similar method as before is used to draw Mario 
       show()
     draw_image(images[i+j == 3], x - 8, screen_h - 48, 16, palettes[i+j == 3], itransp= i+j!=3 and -1)    #Icons?
     show()
-qr_mark(259, screen_h - 15, 7, [0, 0, 255], 2)        #Draws the little blue "key" below the casio door. The palette specifies the color.
+qr_mark(screen_w//2 + (screen_w // 6) - 7, screen_h - 15, 7, [0, 255, 0], 2)        #Draws the green key below the NumWorks door.
+qr_mark(screen_w//2 + (screen_w // 3) - 7, screen_h - 15, 7, [0, 0, 255], 2)        #Draws the blue j=key below the Casio Door. Most likely, on day 17, there will be a Red key under the TI door.
 show()
 wait()

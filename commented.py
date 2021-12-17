@@ -1,8 +1,8 @@
 from math import ceil
 
 platform = ''                     #Some interesting stuff has been added up here on day 12. 
-#try: from sys import platform    #This might be used later?
-#except: pass                     #This stuff got commented out on day 14.
+try: from sys import platform    #No clue what it does
+except: pass                     #This stuff got commented out on day 14. Now it's un-commented again on day 17.
 
 def nop(*argv): pass
 show, wait = nop, nop
@@ -224,11 +224,10 @@ for j in range(-1, 2, 2):     #A similar method as before is used to draw Mario 
   for i in range(1, 3):                             #This loop just draws mario, doors and icons.
     x = screen_w//2 - j*(screen_w * i // 6)
     if i+j != 3:
+      qr_mark(x - 7, screen_h - 15, 7, [(k + 2) % 3 == i + j and 255 or 0 for k in range(3)], 2)        #This draws the different keys under their respective doors. 
+      show()
       draw_image(images[2 + i + j], x - 8, screen_h - 64, 16, palettes[2 + i + j], itransp=0)             #Doors?
       show()
     draw_image(images[i+j == 3], x - 8, screen_h - 48, 16, palettes[i+j == 3], itransp= i+j!=3 and -1)    #Icons?
     show()
-qr_mark(screen_w//2 + (screen_w // 6) - 7, screen_h - 15, 7, [0, 255, 0], 2)        #Draws the green key below the NumWorks door.
-qr_mark(screen_w//2 + (screen_w // 3) - 7, screen_h - 15, 7, [0, 0, 255], 2)        #Draws the blue j=key below the Casio Door. Most likely, on day 17, there will be a Red key under the TI door.
-show()
 wait()

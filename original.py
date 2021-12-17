@@ -1,8 +1,8 @@
 from math import ceil
 
 platform = ''
-#try: from sys import platform
-#except: pass
+try: from sys import platform
+except: pass
 
 def nop(*argv): pass
 show, wait = nop, nop
@@ -214,11 +214,10 @@ for j in range(-1, 2, 2):
   for i in range(1, 3):
     x = screen_w//2 - j*(screen_w * i // 6)
     if i+j != 3:
+      qr_mark(x - 7, screen_h - 15, 7, [(k + 2) % 3 == i + j and 255 or 0 for k in range(3)], 2)
+      show()
       draw_image(images[2 + i + j], x - 8, screen_h - 64, 16, palettes[2 + i + j], itransp=0)
       show()
     draw_image(images[i+j == 3], x - 8, screen_h - 48, 16, palettes[i+j == 3], itransp= i+j!=3 and -1)
     show()
-qr_mark(screen_w//2 + (screen_w // 6) - 7, screen_h - 15, 7, [0, 255, 0], 2)
-qr_mark(screen_w//2 + (screen_w // 3) - 7, screen_h - 15, 7, [0, 0, 255], 2)
-show()
 wait()

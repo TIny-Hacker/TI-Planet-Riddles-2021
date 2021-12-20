@@ -248,4 +248,22 @@ images = (
 for i in range(2):
   draw_image(images[-i], screen_w//2-16, screen_h-32-16*i, 32, palettes[0], itransp=0)
 show()
+
+def qr_size(v):
+  return 17 + 4*v
+
+qr_ver = 3
+qr_margin = 4
+qr_size_code = qr_size(qr_ver)
+qr_size_code_margin = qr_size_code + 2*qr_margin + 4
+qr_zoom = max(1, min(screen_w // qr_size_code_margin, (screen_h - 128) // qr_size_code_margin))
+qr_size_code_margin -= 4
+qr_width = qr_size_code_margin * qr_zoom
+x_qr = (screen_w - qr_width) // 2
+y_qr = (screen_h - qr_width) // 2
+for k in range(1, 3):
+  draw_rect_z(x_qr - k*qr_zoom, y_qr - k*qr_zoom, qr_size_code_margin + 2*k, qr_size_code_margin + 2*k, k > 1 and (0, 0, 0) or (255, 255, 255), qr_zoom)
+qr_margin *= qr_zoom
+fill_rect(x_qr, y_qr, qr_width, qr_width, (0,64,64))
+show()
 wait()

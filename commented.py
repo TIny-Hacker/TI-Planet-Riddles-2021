@@ -260,4 +260,24 @@ images = (
 for i in range(2):                #Displays the treasure chest 
   draw_image(images[-i], screen_w//2-16, screen_h-32-16*i, 32, palettes[0], itransp=0)
 show()
+
+def qr_size(v):         #presumably the size of the QR Code
+  return 17 + 4*v
+
+#This bit is very confusing to me
+
+qr_ver = 3        #Not sure what this is
+qr_margin = 4
+qr_size_code = qr_size(qr_ver)      #Not sure what this is
+qr_size_code_margin = qr_size_code + 2*qr_margin + 4
+qr_zoom = max(1, min(screen_w // qr_size_code_margin, (screen_h - 128) // qr_size_code_margin))   #QR zoom: Whether or not the code will be zoomed in
+qr_size_code_margin -= 4            #Margin on QR code adjusted?
+qr_width = qr_size_code_margin * qr_zoom      #Width of QR Code
+x_qr = (screen_w - qr_width) // 2       #X and Y of QR Code
+y_qr = (screen_h - qr_width) // 2
+for k in range(1, 3):
+  draw_rect_z(x_qr - k*qr_zoom, y_qr - k*qr_zoom, qr_size_code_margin + 2*k, qr_size_code_margin + 2*k, k > 1 and (0, 0, 0) or (255, 255, 255), qr_zoom)    #Draws QR code?
+qr_margin *= qr_zoom          #Margin around the border?
+fill_rect(x_qr, y_qr, qr_width, qr_width, (0,64,64))        #Fills the background of the QR code
+show()
 wait()

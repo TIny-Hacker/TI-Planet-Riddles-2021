@@ -266,12 +266,12 @@ def qr_size(v):         #presumably the size of the QR Code
 
 #This bit is very confusing to me
 
-qr_ver = 3        #Not sure what this is
-qr_margin = 4
-qr_size_code = qr_size(qr_ver)      #Not sure what this is
-qr_size_code_margin = qr_size_code + 2*qr_margin + 4
+qr_ver = 3        #Vertical
+qr_margin = 4                       #Between inner and outer square
+qr_size_code = qr_size(qr_ver)       #Size of QR code based on vertical height
+qr_size_code_margin = qr_size_code + 2*qr_margin + 4    #Other margin?
 qr_zoom = max(1, min(screen_w // qr_size_code_margin, (screen_h - 128) // qr_size_code_margin))   #QR zoom: Whether or not the code will be zoomed in
-qr_size_code_margin -= 4            #Margin on QR code adjusted?
+qr_size_code_margin -= 4            #Other margin on QR code adjusted?
 qr_width = qr_size_code_margin * qr_zoom      #Width of QR Code
 x_qr = (screen_w - qr_width) // 2       #X and Y of QR Code
 y_qr = (screen_h - qr_width) // 2
@@ -279,5 +279,14 @@ for k in range(1, 3):
   draw_rect_z(x_qr - k*qr_zoom, y_qr - k*qr_zoom, qr_size_code_margin + 2*k, qr_size_code_margin + 2*k, k > 1 and (0, 0, 0) or (255, 255, 255), qr_zoom)    #Draws QR code?
 qr_margin *= qr_zoom          #Margin around the border?
 fill_rect(x_qr, y_qr, qr_width, qr_width, (0,64,64))        #Fills the background of the QR code
+
+#This draws the tiny QR code corner box thingy in the top of the QR Code frame
+
+def qr_frame(v, x, y, c, z=1):
+  s = qr_size(v)
+  l = (0, s - 7)
+  qr_mark(x, y, 7, c, z)
+
+qr_frame(qr_ver, x_qr + qr_margin, y_qr + qr_margin, (255,255,255), qr_zoom)      #Draws the tiny QR Code box in white
 show()
 wait()

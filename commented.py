@@ -280,12 +280,15 @@ for k in range(1, 3):
 qr_margin *= qr_zoom          #Margin around the border?
 fill_rect(x_qr, y_qr, qr_width, qr_width, (0,64,64))        #Fills the background of the QR code
 
-#This draws the tiny QR code corner box thingy in the top of the QR Code frame
+#This draws the tiny QR code corner box thingy in the corners of the QR Code frame
 
 def qr_frame(v, x, y, c, z=1):
   s = qr_size(v)
   l = (0, s - 7)
-  qr_mark(x, y, 7, c, z)
+  for dy in l:                    #This loops draws the corner boxes
+    for dx in l:
+      if not dx or not dy:
+        qr_mark(x + dx*z, y + dy*z, 7, c, z)
 
 qr_frame(qr_ver, x_qr + qr_margin, y_qr + qr_margin, (255,255,255), qr_zoom)      #Draws the tiny QR Code box in white
 show()

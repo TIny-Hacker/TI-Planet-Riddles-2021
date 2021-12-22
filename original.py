@@ -269,7 +269,10 @@ fill_rect(x_qr, y_qr, qr_width, qr_width, (0,64,64))
 def qr_frame(v, x, y, c, z=1):
   s = qr_size(v)
   l = (0, s - 7)
-  qr_mark(x, y, 7, c, z)
+  for dy in l:
+    for dx in l:
+      if not dx or not dy:
+        qr_mark(x + dx*z, y + dy*z, 7, c, z)
 
 qr_frame(qr_ver, x_qr + qr_margin, y_qr + qr_margin, (255,255,255), qr_zoom)
 show()

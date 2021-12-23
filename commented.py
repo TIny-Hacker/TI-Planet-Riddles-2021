@@ -289,6 +289,8 @@ def qr_frame(v, x, y, c, z=1):
     for dx in l:
       if not dx or not dy:
         qr_mark(x + dx*z, y + dy*z, 7, c, z)
+  for i in range(8, s-8, 2):                      #Begins to draw the QR Code in the box.
+    fill_rect(x + i*z, y + 6*z, z, z, c)
 
 qr_frame(qr_ver, x_qr + qr_margin, y_qr + qr_margin, (255,255,255), qr_zoom)      #Draws the tiny QR Code box in white
 show()

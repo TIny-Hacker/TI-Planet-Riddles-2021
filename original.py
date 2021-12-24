@@ -275,6 +275,7 @@ def qr_frame(v, x, y, c, z=1):
         qr_mark(x + dx*z, y + dy*z, 7, c, z)
   for i in range(8, s-8, 2):
     fill_rect(x + i*z, y + 6*z, z, z, c)
+    fill_rect(x + 6*z, y + i*z, z, z, c)
 
 qr_frame(qr_ver, x_qr + qr_margin, y_qr + qr_margin, (255,255,255), qr_zoom)
 show()

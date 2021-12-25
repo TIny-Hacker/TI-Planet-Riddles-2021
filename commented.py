@@ -1,8 +1,8 @@
 from math import ceil
 
 platform = ''                     #Some interesting stuff has been added up here on day 12. 
-try: from sys import platform    #No clue what it does
-except: pass                     #This stuff got commented out on day 14. Now it's un-commented again on day 17.
+#try: from sys import platform    #No clue what it does
+#except: pass                     #This stuff got commented out on day 14. Now it's un-commented again on day 17. And now it's commented again the 25th.
 
 def nop(*argv): pass
 show, wait = nop, nop
@@ -280,6 +280,18 @@ for k in range(1, 3):
 qr_margin *= qr_zoom          #Margin around the border?
 fill_rect(x_qr, y_qr, qr_width, qr_width, (0,64,64))        #Fills the background of the QR code
 
+def qr_alignments(v):         #Not sure what this does. I think it's related to the tiny box
+  s = qr_size(v)
+  positions = []
+  n = v // 7 + 2
+  first = 4
+  positions.append(first)
+  last = s - 5 - first
+  step = last - ((first + last*(n - 2) + (n - 1)//2) // (n - 1) & -2)
+  second = last - (n - 2) * step
+  positions.extend(range(second, last + 1, step))
+  return position
+
 #This draws the tiny QR code corner box thingy in the corners of the QR Code frame
 
 def qr_frame(v, x, y, c, z=1):
@@ -292,6 +304,11 @@ def qr_frame(v, x, y, c, z=1):
   for i in range(8, s-8, 2):                      #Begins to draw the QR Code in the box.
     fill_rect(x + i*z, y + 6*z, z, z, c)          #Draws top dots
     fill_rect(x + 6*z, y + i*z, z, z, c)          #Draws left dots
+  l = qr_alignments(v)                            #This stuff is related to the tiny box in the corner
+  for dy in l:
+    for dx in l:
+      if not (dy < 8 and (dx < 8  or dx > s - 10) or dx < 8 and dy > s - 10):
+        qr_mark(x + (dx - 0)*z, y + (dy - 0)*z, 5, c, z)
 
 qr_frame(qr_ver, x_qr + qr_margin, y_qr + qr_margin, (255,255,255), qr_zoom)      #Draws the tiny QR Code box in white
 show()

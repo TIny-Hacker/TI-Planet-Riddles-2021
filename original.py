@@ -1,8 +1,8 @@
 from math import ceil
 
 platform = ''
-try: from sys import platform
-except: pass
+#try: from sys import platform
+#except: pass
 
 def nop(*argv): pass
 show, wait = nop, nop
@@ -266,6 +266,18 @@ for k in range(1, 3):
 qr_margin *= qr_zoom
 fill_rect(x_qr, y_qr, qr_width, qr_width, (0,64,64))
 
+def qr_alignments(v):
+  s = qr_size(v)
+  positions = []
+  n = v // 7 + 2
+  first = 4
+  positions.append(first)
+  last = s - 5 - first
+  step = last - ((first + last*(n - 2) + (n - 1)//2) // (n - 1) & -2)
+  second = last - (n - 2) * step
+  positions.extend(range(second, last + 1, step))
+  return positions
+
 def qr_frame(v, x, y, c, z=1):
   s = qr_size(v)
   l = (0, s - 7)
@@ -276,6 +288,11 @@ def qr_frame(v, x, y, c, z=1):
   for i in range(8, s-8, 2):
     fill_rect(x + i*z, y + 6*z, z, z, c)
     fill_rect(x + 6*z, y + i*z, z, z, c)
+  l = qr_alignments(v)
+  for dy in l:
+    for dx in l:
+      if not (dy < 8 and (dx < 8  or dx > s - 10) or dx < 8 and dy > s - 10):
+        qr_mark(x + (dx - 0)*z, y + (dy - 0)*z, 5, c, z)
 
 qr_frame(qr_ver, x_qr + qr_margin, y_qr + qr_margin, (255,255,255), qr_zoom)
 show()

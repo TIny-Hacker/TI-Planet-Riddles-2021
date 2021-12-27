@@ -8,6 +8,6 @@ I attempted to read some of the QR Codes by hand using some tutorials I found on
 
 To decode the QR Code, you need to figure out the encoding, mask, and length. After you know that you can XOR the QR Code data area with the mask pattern, and then convert each section of bits into ASCII (Use your encoding type to figure this out). I left most of the stuff I used in the repo.
 
-After attempting to do this by hand, I decided to use a website with more specific tools for it: merricx.github.io/qrazybox
+After attempting to do this by hand, I decided to use a website with more specific tools for it: https://merricx.github.io/qrazybox/
 
 This will not work on PC/Mac because the dependencies are calculator-specific. It's probably possible to port but I'm too busy/lazy.

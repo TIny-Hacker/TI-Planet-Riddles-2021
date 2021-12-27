@@ -1,6 +1,10 @@
 QR Code stuff
 
+Version 3 QR Code
+
 00011010 = 26 Bytes of info
+0100 = 8-Bit Byte encoding
+Mask type = 010 (11111 XORd with 10101)
 
 Code
 
